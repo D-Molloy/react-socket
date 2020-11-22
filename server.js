@@ -23,8 +23,9 @@ const server = http.createServer(app)
 const io = socketIo(server)
 
 const getApiAndEmit = socket => {
+  console.log('socket.id', socket.id)
   const response = new Date()
-  socket.emit("FromAPI", response)
+  socket.emit("time", response)
 }
 
 let interval;
@@ -40,9 +41,9 @@ io.on("connection", socket => {
   })
 })
 
-io.on('connect_error', (error) => {
-  console.log('error', error)
-});
+// io.on('connect_error', (error) => {
+//   console.log('error', error)
+// });
 
 server.listen(PORT, () => console.log(`"Listening on http://localhost:${PORT}`))
 // Define API routes here
